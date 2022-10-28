@@ -15,6 +15,13 @@
         <ValidationMessage For="@(() => skill.Name)" />
     </div>
     <div class="mb-3">
+        <label for="Name" class="form-label">Description</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="skill.Description" />
+        </div>
+        <ValidationMessage For="@(() => skill.Description)" />
+    </div>
+    <div class="mb-3">
         <label for="Address" class="form-label">Address</label>
         <div class="col-md-4">
             <label for="Name" class="form-label">@skill.CreatedAt.ToString()</label>
