@@ -31,12 +31,21 @@ namespace EM.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(policy =>
+            {
+                policy.AddPolicy("CorsPolicy", opt => opt
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            });
 
             services.AddControllers();
-            services.AddDbContext<EMContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EM")));
+            services.AddDbContext<EMContext>(options => options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("EM")));
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<ISkillRepository, SkillRepository>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
@@ -47,8 +56,9 @@ namespace EM.Api
 
             services.AddControllers().AddNewtonsoftJson(options =>
             {
-                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                options.SerializerSettings.Converters.Add(new IsoDateTimeConverter());
+            options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+            options.SerializerSettings.Converters.Add(new IsoDateTimeConverter());
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
         }
 
@@ -67,6 +77,8 @@ namespace EM.Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors("CorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {

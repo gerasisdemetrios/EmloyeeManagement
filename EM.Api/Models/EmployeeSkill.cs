@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EM.Api.Models
 {
+    [Table("EmployeeSkills")]
     public class EmployeeSkill
     {
         public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
 
         public int SkillId { get; set; }
-        public Skill Skill { get; set; }
+        public virtual Skill Skill { get; set; }
     }
 }

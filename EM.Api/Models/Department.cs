@@ -16,7 +16,7 @@ namespace EM.Api.Models
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public virtual IList<Employee> Employees { get; set; }
+        public virtual List<Employee> Employees { get; set; }
 
     }
 }

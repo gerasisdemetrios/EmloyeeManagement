@@ -10,9 +10,10 @@ namespace EM.Api.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public IList<EmployeeSkill> EmployeeSkills { get; set; }
+        public virtual List<EmployeeSkill> EmployeeSkills { get; set; }
     }
 }

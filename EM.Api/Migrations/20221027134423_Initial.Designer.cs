@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EM.Api.Migrations
 {
     [DbContext(typeof(EMContext))]
-    [Migration("20221026100511_Initial")]
+    [Migration("20221027134423_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,7 +35,9 @@ namespace EM.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.HasKey("Id");
 
@@ -64,10 +66,8 @@ namespace EM.Api.Migrations
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Zip")
@@ -77,7 +77,7 @@ namespace EM.Api.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Employee");
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("EM.Api.Models.EmployeeSkill", b =>
@@ -92,7 +92,7 @@ namespace EM.Api.Migrations
 
                     b.HasIndex("SkillId");
 
-                    b.ToTable("EmployeeSkill");
+                    b.ToTable("EmployeeSkills");
                 });
 
             modelBuilder.Entity("EM.Api.Models.Skill", b =>
@@ -106,6 +106,7 @@ namespace EM.Api.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

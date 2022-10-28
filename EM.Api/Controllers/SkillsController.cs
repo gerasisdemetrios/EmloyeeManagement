@@ -13,51 +13,52 @@ namespace EM.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DepartmentsController : ControllerBase
+    public class SkillsController : ControllerBase
     {
-        private readonly IDepartmentRepository _repository;
+        private readonly ISkillRepository _repository;
         private readonly IMapper _mapper;
-        public DepartmentsController(IDepartmentRepository repository, IMapper mapper)
+ 
+        public SkillsController(ISkillRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DepartmentDto>>> Get()
+        public async Task<ActionResult<IEnumerable<SkillDto>>> Get()
         {
 
             try
             {
-                IEnumerable<Department> departments = await _repository.GetAllAsync();
+                IEnumerable<Skill> skills = await _repository.GetAllAsync();
 
-                IEnumerable<DepartmentDto> departmentsDto = _mapper.Map<IEnumerable<DepartmentDto>>(departments);
+                IEnumerable<SkillDto> skillsDto = _mapper.Map<IEnumerable<SkillDto>>(skills);
 
 
-                return Ok(departmentsDto);
+                return Ok(skillsDto);
             }
-            catch(Exception ex)
+            catch
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, "An internal server error occurred.");
             }
 
         }
 
-        [HttpGet("{id}",Name = "DepartmentEndpoint")]
-        public async Task<ActionResult<DepartmentDto>> Get(int id)
+        [HttpGet("{id}",Name = "SkillEndpoint")]
+        public async Task<ActionResult<EmployeeDto>> Get(int id)
         {
             try
             {
-                Department department = await _repository.GetByIdAsync(id);
+                Skill skill = await _repository.GetByIdAsync(id);
 
-                if (department == null)
+                if (skill == null)
                 {
                     return NotFound();
                 }
 
-                DepartmentDto departmentDto = _mapper.Map<DepartmentDto>(department);
+                SkillDto skillDto = _mapper.Map<SkillDto>(skill);
 
-                return Ok(departmentDto);
+                return Ok(skillDto);
 
             }
             catch
@@ -67,11 +68,11 @@ namespace EM.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<DepartmentDto>> Update(int id, DepartmentDto departmentDto)
+        public async Task<ActionResult<EmployeeDto>> Update(int id, SkillDto skillDto)
         {
             try
             {
-                if (departmentDto is null)
+                if (skillDto is null)
                 {
                     return BadRequest("Owner object is null");
                 }
@@ -81,23 +82,23 @@ namespace EM.Api.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                if (id != departmentDto.Id)
+                if (id != skillDto.Id)
                 {
                     return BadRequest();
                 }
 
-                Department existingDepartment= await _repository.GetByIdAsync(id);
+                Skill existingSkill= await _repository.GetByIdAsync(id);
 
-                if (existingDepartment == null)
+                if (existingSkill == null)
                 {
                     return NotFound();
                 }
 
-                _mapper.Map(departmentDto, existingDepartment);
+                _mapper.Map(skillDto, existingSkill);
 
-                await _repository.UpdateAsync(existingDepartment);
+                await _repository.UpdateAsync(existingSkill);
 
-                return Ok(departmentDto);
+                return Ok(skillDto);
 
             }
             catch
@@ -107,29 +108,29 @@ namespace EM.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(DepartmentDto departmentDto)
+        public async Task<IActionResult> Create(SkillDto skillDto)
         {
             try
             {
-                if (departmentDto is null)
+                if (skillDto is null)
                 {
-                    return BadRequest("Owner object is null");
+                    return BadRequest();
                 }
 
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest("Invalid model object");
+                    return BadRequest();
                 }
 
-                Department department = _mapper.Map<Department>(departmentDto);
+                Skill skill = _mapper.Map<Skill>(skillDto);
 
-                department.CreatedAt = DateTime.Now;
+                skill.CreatedAt = DateTime.Now;
 
-                Department createdDepartment = await _repository.SaveAsync(department);
+                Skill createdSkill = await _repository.SaveAsync(skill);
 
-                DepartmentDto createdDepartmentDto = _mapper.Map<DepartmentDto>(createdDepartment);
+                SkillDto createdSkillDto = _mapper.Map<SkillDto>(createdSkill);
 
-                return CreatedAtRoute("DepartmentEndpoint", new { id = createdDepartmentDto.Id }, createdDepartmentDto);
+                return CreatedAtRoute("SkillEndpoint", new { id = createdSkillDto.Id }, createdSkillDto);
 
             }
             catch
