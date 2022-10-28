@@ -2,11 +2,8 @@ using EM.App.Repository;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EM.App
@@ -18,8 +15,10 @@ namespace EM.App
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://localhost:15861/api/") });
-            builder.Services.AddScoped<IHttpRepository, HttpRepository>();
+            string baseAddress = builder.Configuration.GetSection("ApiUrl").Value;
+
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(baseAddress) });
+            builder.Services.AddScoped<ISkillRepository, SkillRepository>();
 
             await builder.Build().RunAsync();
         }

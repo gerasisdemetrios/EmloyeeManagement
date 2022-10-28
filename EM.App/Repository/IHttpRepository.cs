@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace EM.App.Repository
 {
-    public interface IHttpRepository
+    public interface ISkillRepository
     {
         Task<List<SkillDto>> GetSkills();
         Task<SkillDto> GetSkill(int id);

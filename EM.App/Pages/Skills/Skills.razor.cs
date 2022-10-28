@@ -13,7 +13,7 @@ namespace EM.App.Pages.Skills
         public List<SkillDto> SkillsList { get; set; } = new List<SkillDto>();
 
         [Inject]
-        public IHttpRepository Repo { get; set; }
+        public ISkillRepository Repo { get; set; }
 
         [Inject]
         NavigationManager NavigationManager { get; set; }

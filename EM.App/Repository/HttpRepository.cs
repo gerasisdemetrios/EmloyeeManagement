@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace EM.App.Repository
 {
-    public class HttpRepository : IHttpRepository
+    public class SkillRepository : ISkillRepository
     {
 
         private readonly HttpClient _client;
         private readonly JsonSerializerOptions _options;
-        public HttpRepository(HttpClient client)
+        public SkillRepository(HttpClient client)
         {
             _client = client;
             _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };

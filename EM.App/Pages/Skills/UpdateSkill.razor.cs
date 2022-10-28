@@ -17,7 +17,7 @@ namespace EM.App.Pages.Skills
         NavigationManager NavigationManager { get; set; }
 
         [Inject]
-        public IHttpRepository Repo { get; set; }
+        public ISkillRepository Repo { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
