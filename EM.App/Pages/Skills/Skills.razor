@@ -1,0 +1,43 @@
+﻿@page "/skills"
+
+<div class="row">
+    <div class="col-md-10">
+        @*Place for search and sort*@
+    </div>
+    <div class="col-md-2">
+        <a href="/skill/create">Create Skill</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var skill in SkillsList)
+                    {
+                        <tr>
+                            <td class="align-middle">
+                                @skill.Name
+                            </td>
+                            <td class="align-middle">
+                                @skill.CreatedAt
+                            </td>
+                            <td class="align-middle">
+                                <button type="button" class="btn btn-info" @onclick="@(() => UpdateSkill(skill.Id))">Update</button>
+                            </td>
+                            <td class="align-middle">
+                                <button type="button" class="btn btn-danger" @onclick="@(async () => await DeleteSkill(skill.Id))">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    </div>
+</div>

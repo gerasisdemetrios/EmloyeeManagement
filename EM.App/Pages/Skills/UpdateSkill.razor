@@ -1,0 +1,28 @@
+﻿@page "/skill/update/{skillId:int}"
+
+
+<h3>Update Skill</h3>
+
+<hr />
+
+<EditForm Model="@skill" OnValidSubmit="Save">
+    <DataAnnotationsValidator />
+    <div class="mb-3">
+        <label for="Name" class="form-label">Name</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="skill.Name" />
+        </div>
+        <ValidationMessage For="@(() => skill.Name)" />
+    </div>
+    <div class="mb-3">
+        <label for="Address" class="form-label">Address</label>
+        <div class="col-md-4">
+            <label for="Name" class="form-label">@skill.CreatedAt.ToString()</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button class="btn btn-light" @onclick="Cancel">Cancel</button>
+    </div>
+</EditForm>
+
