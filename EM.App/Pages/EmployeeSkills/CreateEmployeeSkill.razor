@@ -1,11 +1,11 @@
 ﻿@page "/employees/{employeeId:int}/skill/create"
 
-<h3>Create Employee</h3>
+<h3>Assign Skill</h3>
 <hr />
 <EditForm Model="@skill" OnValidSubmit="Save">
     <DataAnnotationsValidator />
     <div class="mb-3">
-        <label for="Name" class="form-label">Department</label>
+        <label for="Name" class="form-label">Skill</label>
         <div class="col-md-4">
             <InputSelect @bind-Value="skillId" class="form-control">
                 @if (SkillsList != null)

@@ -33,7 +33,7 @@ namespace EM.App.Pages.Employees
 
         protected async Task Save()
         {
-            if (!string.IsNullOrWhiteSpace(employee.Name))
+            if (!string.IsNullOrWhiteSpace(employee.FirstName) && !string.IsNullOrWhiteSpace(employee.LastName))
             {
                 await EmployeeRepo.CreateEmployee(employee);
             }

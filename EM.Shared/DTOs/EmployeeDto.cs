@@ -8,7 +8,9 @@ namespace EM.Shared.DTOs
     {
         public int Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
         public DateTime? BirtDate { get; set; }
         public string Address { get; set; }
         public string City { get; set; }

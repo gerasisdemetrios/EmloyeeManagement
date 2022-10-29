@@ -1,11 +1,13 @@
 ﻿@page "/employees/{employeeId:int}/skills"
-
+    
+<h3>Skills</h3>
+<br>
 <div class="row">
     <div class="col-md-10">
         @*Place for search and sort*@
     </div>
     <div class="col-md-2">
-        <a href="@($"/employees/{employee.Id}/skill/create")">Create Skill</a>
+        <a href="@($"/employees/{employee.Id}/skill/create")">Assign Skill</a>
     </div>
 </div>
 <div class="row">
