@@ -32,5 +32,10 @@ namespace EM.App.Pages.Employees
         {
             NavigationManager.NavigateTo($"/employee/update/{id}");
         }
+
+        private void DetailsEmployee(int id)
+        {
+            NavigationManager.NavigateTo($"/employees/{id}/skills");
+        }
     }
 }

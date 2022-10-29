@@ -19,6 +19,7 @@
                     <th scope="col">Address</th>
                     <th scope="col">City</th>
                     <th scope="col">Zip</th>
+                    <th scope="col">Skills</th>
                     <th scope="col">Update</th>
                     <th scope="col">Delete</th>
                 </tr>
@@ -44,6 +45,9 @@
                     </td>
                     <td class="align-middle">
                         @employee.Zip
+                    </td>
+                    <td class="align-middle">
+                        <button type="button" class="btn btn-success" @onclick="@(() => DetailsEmployee(employee.Id))">Skills</button>
                     </td>
                     <td class="align-middle">
                         <button type="button" class="btn btn-info" @onclick="@(() => UpdateEmployee(employee.Id))">Update</button>
