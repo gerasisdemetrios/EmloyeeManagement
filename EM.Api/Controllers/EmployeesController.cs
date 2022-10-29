@@ -74,48 +74,41 @@ namespace EM.Api.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<EmployeeDto>> Update(int id, EmployeeDto employeeDto)
         {
-            try
+  
+            if (employeeDto is null)
             {
-                if (employeeDto is null)
-                {
-                    return BadRequest("Owner object is null");
-                }
-
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest("Invalid model object");
-                }
-
-                if (id != employeeDto.Id)
-                {
-                    return BadRequest();
-                }
-
-                Employee existingEmployee = await _repository.GetByIdAsync(id);
-
-                if (existingEmployee == null)
-                {
-                    return NotFound();
-                }
-
-                Department department = await _departmentRepository.GetByIdAsync(employeeDto.DepartmentId.Value);
-
-                if (department == null)
-                {
-                    return BadRequest("Not existing department");
-                }
-
-                _mapper.Map(employeeDto, existingEmployee);
-
-                await _repository.UpdateAsync(existingEmployee);
-
-                return Ok(employeeDto);
-
+                return BadRequest("Owner object is null");
             }
-            catch(Exception Ex)
+
+            if (!ModelState.IsValid)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An internal server error occurred.");
+                return BadRequest("Invalid model object");
             }
+
+            if (id != employeeDto.Id)
+            {
+                return BadRequest();
+            }
+
+            Employee existingEmployee = await _repository.GetByIdAsync(id);
+
+            if (existingEmployee == null)
+            {
+                return NotFound();
+            }
+
+            Department department = await _departmentRepository.GetByIdAsync(employeeDto.DepartmentId.Value);
+
+            if (department == null)
+            {
+                return BadRequest("Not existing department");
+            }
+
+            _mapper.Map(employeeDto, existingEmployee);
+
+            await _repository.UpdateAsync(existingEmployee);
+
+            return Ok(employeeDto);
         }
 
         [HttpPost]

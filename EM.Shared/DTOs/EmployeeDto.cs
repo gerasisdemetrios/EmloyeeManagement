@@ -14,6 +14,8 @@ namespace EM.Shared.DTOs
         public string City { get; set; }
         public string Zip { get; set; }
 
+        public string Department { get; set; }
+
         [Required]
         public int? DepartmentId { get; set; }
 

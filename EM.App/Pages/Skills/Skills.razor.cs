@@ -30,7 +30,7 @@ namespace EM.App.Pages.Skills
             await OnInitializedAsync();
         }
 
-        private async Task UpdateSkill(int id)
+        private void UpdateSkill(int id)
         {
             NavigationManager.NavigateTo($"/skill/update/{id}");
         }

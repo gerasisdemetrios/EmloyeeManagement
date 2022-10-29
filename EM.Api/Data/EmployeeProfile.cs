@@ -9,8 +9,14 @@ namespace EM.Api.Data
         public EmployeeProfile()
         {
 
-            CreateMap<Employee, EmployeeDto>().ForMember(dest => dest.Skills, src => src.MapFrom(x => x.EmployeeSkills)).ReverseMap();
-            
+            CreateMap<Employee, EmployeeDto>()
+                .ForMember(dest => dest.Skills, src => src.MapFrom(x => x.EmployeeSkills))
+                .ForMember(dest => dest.Department, src => src.MapFrom(x => x.Dapartment.Name));
+
+            CreateMap<EmployeeDto, Employee>()
+                .ForMember(dest => dest.EmployeeSkills, src => src.MapFrom(x => x.Skills));
+
+
             CreateMap<EmployeeSkill, SkillDto>().ForMember(dest => dest.Id, src => src.MapFrom(x => x.Skill.Id)).ForMember(dest => dest.Id, src => src.MapFrom(x => x.SkillId)).ForMember(dest => dest.Name, src => src.MapFrom(x => x.Skill.Name)).ReverseMap();
 
             CreateMap<EmployeeSkill, EmployeeDto>()

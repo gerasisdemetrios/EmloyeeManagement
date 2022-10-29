@@ -19,6 +19,7 @@ namespace EM.App
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(baseAddress) });
             builder.Services.AddScoped<ISkillRepository, SkillRepository>();
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             await builder.Build().RunAsync();
         }
