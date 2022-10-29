@@ -137,14 +137,17 @@ namespace EM.Api.Controllers
 
                 employee.EmployeeSkills = new List<EmployeeSkill>();
 
-                foreach (SkillDto skillDto in employeeDto.Skills)
+                if (employeeDto.Skills != null)
                 {
-                    var skill = await _skillRepository.GetByIdAsync(skillDto.Id);
-
-                    if (skill != null)
+                    foreach (SkillDto skillDto in employeeDto.Skills)
                     {
-                        employee.EmployeeSkills.Add(new EmployeeSkill { SkillId = skill.Id, Skill = skill, Employee = employee });
-                    }                    
+                        var skill = await _skillRepository.GetByIdAsync(skillDto.Id);
+
+                        if (skill != null)
+                        {
+                            employee.EmployeeSkills.Add(new EmployeeSkill { SkillId = skill.Id, Skill = skill, Employee = employee });
+                        }
+                    }
                 }
 
                 employee.CreatedAt = DateTime.Now;

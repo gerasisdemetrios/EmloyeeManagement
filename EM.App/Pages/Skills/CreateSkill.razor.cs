@@ -19,14 +19,6 @@ namespace EM.App.Pages.Skills
         [Inject]
         public ISkillRepository Repo { get; set; }
 
-        protected override async Task OnParametersSetAsync()
-        {
-            if (skillId != 0)
-            {
-                skill = await Repo.GetSkill(skillId);
-            }
-        }
-
         protected async Task Save()
         {
             if (!string.IsNullOrWhiteSpace(skill.Name) )

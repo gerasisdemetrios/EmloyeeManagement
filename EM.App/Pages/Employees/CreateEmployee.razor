@@ -1,0 +1,61 @@
+﻿@page "/employee/create"
+
+<h3>Create Employee</h3>
+<hr />
+<EditForm Model="@employee" OnValidSubmit="Save">
+    <DataAnnotationsValidator />
+    <div class="mb-3">
+        <label for="Name" class="form-label">Name</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="employee.Name" />
+        </div>
+        <ValidationMessage For="@(() => employee.Name)" />
+    </div>
+    <div class="mb-3">
+        <label for="Name" class="form-label">Department</label>
+        <div class="col-md-4">
+            <InputSelect @bind-Value="employee.DepartmentId" class="form-control">
+                @if (DepartmentsList != null)
+                {
+                    @foreach (var dptm in DepartmentsList)
+                    {
+                        <option value="@dptm.Id">@dptm.Name</option>
+                    }
+                }
+            </InputSelect>
+        </div>
+        <ValidationMessage For="@(() => employee.BirtDate)" />
+    </div>
+    <div class="mb-3">
+        <label for="Name" class="form-label">BirtDate</label>
+        <div class="col-md-4">
+            <InputDate class="form-control" @bind-Value="employee.BirtDate" />
+        </div>
+        <ValidationMessage For="@(() => employee.BirtDate)" />
+    </div>
+    <div class="mb-3">
+        <label for="Name" class="form-label">Address</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="employee.Address" />
+        </div>
+        <ValidationMessage For="@(() => employee.Address)" />
+    </div>
+    <div class="mb-3">
+        <label for="Name" class="form-label">City</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="employee.City" />
+        </div>
+        <ValidationMessage For="@(() => employee.City)" />
+    </div>
+    <div class="mb-3">
+        <label for="Name" class="form-label">Zip</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="employee.Zip" />
+        </div>
+        <ValidationMessage For="@(() => employee.Zip)" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button class="btn btn-light" @onclick="Cancel">Cancel</button>
+    </div>
+</EditForm>
